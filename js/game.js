@@ -12,6 +12,8 @@ var requestAnimFrame = (function(){
         };
 })();
 
+// var wallStyle = "../assets/wall.png";
+
 
 ///////////////////
 
@@ -38,38 +40,63 @@ var mice = [];
 var lastTime; // Used for deltaTime
 var score = 0; // Num eaten groupOfCats
 var gameOver = false;
+var seconds = 30;
+var temp;
+
+function countdown() {
+
+    if (seconds <= 1) {
+      playerDied()
+      return;
+    }
+
+    seconds--;
+    temp = document.getElementById('countdown');
+    temp.innerHTML = seconds;
+    timeoutMyOswego = setTimeout(countdown, 1000);
+
+} 
+
+countdown();
+
 // A simple object for a wall, just holds properties
-var wall = {
-    x: 200,
-    y: 100,
-    width: 50,
-    height:300,
-    color: "#000000"
-}
+// var wall = {
+//     x: 200,
+//     y: 100,
+//     width: 50,
+//     height:300,
 
-var cheeseItem = {
-    x: 600,
-    y: 240,
+    
+// }
+
+random = Math.random()* 800;
+random2 = Math.random()* 300;
+
+cheeseItem = {
+    x: random,
+    y: random2,
     width: 32,
-    height:32
+    height:32,  
+    hidden:true                                                                                                 
 }
 
-/*var walls = new Array();
-walls.push({
-    x: 200,
-    y: 100,
-    width: 50,
-    height:300,
-    color: "#000000"
-});
 
-walls.push({
-    x: 400,
-    y: 100,
-    width: 50,
-    height:300,
-    color: "#000000"
-});*/
+
+var walls = [];
+
+var img = document.getElementById("lamp")
+var pat = ctx.createPattern(img, "repeat");
+ctx.fillStyle = pat;
+walls.push(new Shape(200, 100, 50 ,500 ,pat))
+walls.push(new Shape(400, 0, 50, 200, pat));
+walls.push(new Shape(400, 300, 50, 200, pat));
+walls.push(new Shape(600, 0, 50, 500, pat));
+walls.push(new Shape(800, 70, 50, 200, pat));
+walls.push(new Shape(800, 400, 50, 200, pat));
+
+
+
+
 
 // Variables to hold whether keys are pressed or not
 // true means down.
@@ -110,7 +137,7 @@ function init() {
 
     for(var c=0; c<CONST.NUM_groupOfCats; c++) {
         groupOfCats[c] = new cat(animalSpriteSheet);
-        groupOfCats[c].x = canvas.width/2;
+        groupOfCats[c].x = canvas.width/2; // ------spawn location
         groupOfCats[c].y = canvas.height/2;
     }
 
@@ -129,12 +156,12 @@ function init() {
 ///////////////////
 
 // The main loop, this gets called every anim frame
-function mainLoop() {
+function mainLoop(currentTime) {
     // Keep track of delta time (dt)
     // dt is the time elapsed between frames
-    var currentTime = Date.now();
+    currentTime = Date.now();
     var dt = (currentTime - lastTime) / 1000.0;
-  
+    
     
     update(dt);
 
@@ -149,6 +176,8 @@ function mainLoop() {
     }
 
 }
+
+
 
 // Make all draw calls within this func.
 // Don't need to pass ctx here because its in scope for this func (global)
@@ -167,67 +196,44 @@ function render() {
     }
     // Render a wall
     ctx.save(); // Save context just incase, good habit incase we do some transforms
-    ctx.fillStyle = wall.color;
-    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
-    ctx.restore();
+
+    for (var i in walls) {
+        oRec = walls[i];
+        ctx.fillStyle = oRec.fill;
+        ctx.fillRect(oRec.x, oRec.y, oRec.width, oRec.height);
+
+    }
+    
+    
+    // ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
+    
+    // ctx.fill();
+    // ctx.restore();
 
     ctx.save(); // Save context just incase, good habit incase we do some transforms
-    ctx.drawImage(
-            cheese,
-            // image file
-            0,
-            0,
-            cheeseItem.width,
-            cheeseItem.height,
-            // canvas
-            cheeseItem.x,
-            cheeseItem.y,
-            cheeseItem.width,
-            cheeseItem.height);   
-    ctx.restore();
+    if (cheeseItem.hidden == true) {
+        ctx.drawImage(
+                cheese,
+                // image file
+                0,
+                0,
+                cheeseItem.width,
+                cheeseItem.height,
+                // canvas
+                cheeseItem.x,
+                cheeseItem.y,
+                cheeseItem.width,
+                cheeseItem.height);   
+        ctx.restore();
+    };
 
     // Render all sprites and any other draw functions
     player.render(ctx);
 
 }
-
+// draw canvas and border with colors
 function drawCheckerboard() {
     ctx.save();
-
-    var numCheckerCols = 7;
-    var numCheckerRows = 6;
-
-    var checkerHeight = canvas.height/numCheckerRows;
-    var checkerWidth = canvas.width/numCheckerCols;
-    
-    for(var r=0; r<numCheckerRows; r++) {
-        for(var c=0; c<numCheckerCols; c++) {
-            if (r%2 == 0)
-            {
-                if (c%2 == 0)
-                {
-                    ctx.fillStyle = "#eee";
-                }
-                else
-                {
-                    ctx.fillStyle = "white";
-                }
-            }
-            else
-            {
-                if (c%2 == 0)
-                {
-                    ctx.fillStyle = "white";
-                }
-                else
-                {
-                    ctx.fillStyle = "#eee";
-                }
-            }
-         
-            ctx.fillRect(checkerWidth*c,checkerHeight*r,checkerWidth,checkerHeight);
-        }
-    }
 
     ctx.strokeStyle = "#888";
     ctx.strokeRect(0,0,canvas.width,canvas.height)
@@ -293,12 +299,19 @@ function update(dt) {
     // Now we check to see if the player is moving or now
     // and set the idle and new positions
 
-    if(Utils.intersects(newPlayerX, newPlayerY, player.width, player.height, wall.x, wall.y, wall.width, wall.height)) {
-        // Reset new position so player doesn't move (they can't move into a wall)
-        newPlayerX = player.x;
-        newPlayerY = player.y;
-    }
-
+    // if(Utils.intersects(newPlayerX, newPlayerY, player.width, player.height, wall.x, wall.y, wall.width, wall.height)) {
+    //     // Reset new position so player doesn't move (they can't move into a wall)
+    //     newPlayerX = player.x;
+    //     newPlayerY = player.y;
+    // }
+    for (var i = 0; i < walls.length; i++) {
+    
+        if(Utils.intersects(newPlayerX, newPlayerY, player.width, player.height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
+            // Reset new position so player doesn't move (they can't move into a wall)
+            newPlayerX = player.x;
+            newPlayerY = player.y;
+        }
+    };
     if(player.x == newPlayerX && player.y ==  newPlayerY ) {
         player.idle = true;
     } else {
@@ -353,13 +366,25 @@ function update(dt) {
             newcatY = maxY;
 
         // Prevent cat from walking through wall
-        if(Utils.intersects(newcatX, newcatY, groupOfCats[c].width, groupOfCats[c].height, wall.x, wall.y, wall.width, wall.height)) {
-            // Reset new position so cat doesn't move (they can't move into a wall)
-            newcatX = groupOfCats[c].x;
-            newcatY = groupOfCats[c].y;
-        } else {
-            groupOfCats[c].x = newcatX;
-            groupOfCats[c].y = newcatY;
+        // if(Utils.intersects(newcatX, newcatY, groupOfCats[c].width, groupOfCats[c].height, wall.x, wall.y, wall.width, wall.height)) {
+        //     // Reset new position so cat doesn't move (they can't move into a wall)
+        //     newcatX = groupOfCats[c].x;
+        //     newcatY = groupOfCats[c].y;
+        // } else {
+        //     groupOfCats[c].x = newcatX;
+        //     groupOfCats[c].y = newcatY;
+        // }
+
+        for (var i = 0; i < walls.length; i++) {
+    
+            if(Utils.intersects(newcatX, newcatY, groupOfCats[c].width, groupOfCats[c].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
+                // Reset new position so player doesn't move (they can't move into a wall)
+               newcatX = groupOfCats[c].x;
+                newcatY = groupOfCats[c].y;
+            } else {
+                groupOfCats[c].x = newcatX;
+                groupOfCats[c].y = newcatY;
+            }
         }
 
         // Finally do the actual update.
@@ -369,8 +394,10 @@ function update(dt) {
         if(groupOfCats[c].intersectsWith(player.x, player.y, player.width, player.height)) {
             // Deleted all inside, and removed alive stuff
             playerDied();
+          
 
         } else if(player.intersectsWith(cheeseItem.x, cheeseItem.y, cheeseItem.width, cheeseItem.height)) {
+            seconds+=10;
 
             gotCheese();
         }
@@ -415,14 +442,27 @@ function update(dt) {
             newMouseY = maxY;
 
         // Prevent mouse from walking through wall
-        if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, wall.x, wall.y, wall.width, wall.height)) {
-            // Reset new position so mouse doesn't move (they can't move into a wall)
-            newMouseX = mice[m].x;
-            newMouseY = mice[m].y;
-        } else {
-            mice[m].x = newMouseX;
-            mice[m].y = newMouseY;
+        // if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, wall.x, wall.y, wall.width, wall.height)) {
+        //     // Reset new position so mouse doesn't move (they can't move into a wall)
+        //     newMouseX = mice[m].x;
+        //     newMouseY = mice[m].y;
+        // } else {
+        //     mice[m].x = newMouseX;
+        //     mice[m].y = newMouseY;
+        // }
+        for (var i = 0; i < walls.length; i++) {
+    
+            if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
+                // Reset new position so player doesn't move (they can't move into a wall)
+                newMouseX = mice[m].x;
+                newMouseY = mice[m].y;
+            } else {
+                mice[m].x = newMouseX;
+                mice[m].y = newMouseY;
+            }
         }
+
+
 
         // Finally do the actual update.
         mice[m].update(dt);
@@ -442,22 +482,50 @@ function updateScore() {
     score++;
     $('.score').html(score);
     // Check if game ended?
-    if(score == CONST.NUM_mice) {
+    if(score == CONST.NUM_MICE) {
         // Player finished the game
         //$('.gameOverSuccess').show();
-        $('.gameOverSuccess').addClass('reveal');
+
+        $('.gameOverSuccess').html("You Win").addClass('reveal');
+        gameOver = true;  
     }
 }
 
 function playerDied() {
-    $('.gameOverSuccess').html("Nope.").addClass('reveal'); 
+    $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
     gameOver = true;  
 }
 
 function gotCheese() {
-    $('.gameOverSuccess').html("Cheesed").addClass('reveal').css("color","green");  
-     gameOver = true;  
+ 
+    cheeseItem = {
+                x: 1000,
+                y: 1000
+            }     
+    cheeseItem.hidden = false;   
+    random = Math.random()* 300;
+    random2 = Math.random()* 300;
+
+    setTimeout(function(){
+            cheeseItem = {
+            x: random,
+            y: random2, 
+            width: 32,
+            height:32,
+            hidden : true
+        }
+        for (var i = 0; i < walls.length; i++) {
+
+        if(Utils.intersects(cheeseItem.x, cheeseItem.y, cheeseItem.width, cheeseItem.height, walls.x, walls.y, walls.width, walls.height)) {
+            gotCheese();
+        } 
+        }
+    }, 1000);
+    
 }
+
+
+ 
 
 
 document.addEventListener('keydown', function(e) {

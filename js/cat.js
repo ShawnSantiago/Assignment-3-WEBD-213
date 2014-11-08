@@ -10,8 +10,8 @@
         this.x = 0;
         this.y = 0;
 
-        this.xFrameRef = xFrameRef || 0; // cat 9,0
-        this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
+        this.xFrameRef = xFrameRef || 3; // cat 9,0
+        this.yFrameRef = yFrameRef || 4; // The starting position of the y sprite frame
         this.width = 64; // width, height - same as sprite
         this.height = 64;
 
