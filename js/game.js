@@ -34,6 +34,24 @@ var CONST = {
     NUM_MICE: 6
 }; // For constants, vars that never change
 
+/// SETUP AUDIO FILES ////
+
+// Music
+var audioBGMusic = new Audio();
+audioBGMusic.src = 'assets/bgmusic.mp3';
+audioBGMusic.loop = true; // we want the background music to loop
+
+// SFX
+var sfx = {};
+
+sfx.meow = new Audio();
+sfx.meow.src = 'assets/death4.mp3';
+
+sfx.eat = new Audio();
+sfx.eat.src = 'assets/eating1.mp3';
+
+sfx.squeak = new Audio();
+sfx.squeak.src = 'assets/squeak.mp3';
 var player;
 var groupOfCats = [];// new Array();
 var mice = [];
@@ -133,11 +151,83 @@ characerSpriteSheet.onload = function() {
 animalSpriteSheet.src = 'assets/animal.png';
 cheese.src = 'assets/I_C_Cheese.png';
 characerSpriteSheet.src = 'assets/characerSpriteSheet.png'
+
+// Setup Audio only once the page has loaded
+function SetupAudio() {
+   
+    // Setup the audio control buttons
+    $('#volUp').click(volumeUp);
+    $('#volDown').click(volumeDown);
+    $('#mute').click(volumeMute);
+
+    // Start playing the background music immediately
+
+    audioBGMusic.play();
+}
+
+function volumeUp() { 
+
+    var newVolume = volume + CONST.VOL_CHANGE;
+
+    // Volume cannot be larger than 1
+    if(newVolume > 1.0)
+        newVolume = 1.0;
+
+    audioBGMusic.volume = newVolume;
+    sfx.meow.volume     = newVolume;
+    sfx.eat.volume      = newVolume;
+    sfx.squeak.volume   = newVolume;
+
+     volume = newVolume;
+}
+
+function volumeDown() {
+   
+    var newVolume = volume - CONST.VOL_CHANGE;
+
+    // Volume cannot be less than 0
+    if(newVolume < 0)
+        newVolume = 0;
+
+    audioBGMusic.volume = newVolume;
+    sfx.meow.volume     = newVolume;
+    sfx.eat.volume      = newVolume;
+    sfx.squeak.volume   = newVolume;
+
+    volume = newVolume;
+}
+
+function volumeMute() {
+   
+
+    if(!audioBGMusic.muted) {
+        $('#mute').html("Unmute");
+        audioBGMusic.muted = true;
+        sfx.meow.muted     = true;
+        sfx.eat.muted      = true;
+        sfx.squeak.muted   = true;
+    } else {
+        $('#mute').html("Mute");
+        audioBGMusic.muted = false;
+        sfx.meow.muted     = false;
+        sfx.eat.muted      = false;
+        sfx.squeak.muted   = false;
+    }
+}
+
+// Simple function to make it easy to play the sfx audio files.
+// Incase we want to handle them differently later, mute or change a name.
+function PlaySFX(sfxName) {
+    sfx[sfxName].play();
+}
+
+
 ///////////////////
 
 // Setup the game and start the main loop
 function init() {
-
+    SetupAudio();
+    // Play a meow, the cat is hungry!
     player = new Player(characerSpriteSheet, 0, 0, 32, 32);
 
     for(var c=0; c<CONST.NUM_groupOfCats; c++) {
@@ -389,6 +479,7 @@ function update(dt) {
         // If cat and cat are colliding, cat dead.
         if(groupOfCats[c].intersectsWith(player.x, player.y, player.width, player.height)) {
             // Deleted all inside, and removed alive stuff
+            
             playerDied();
           
 
@@ -456,7 +547,7 @@ function update(dt) {
 
         // If mouse and cat are colliding, mouse dead.
         if(mice[m].alive && mice[m].intersectsWith(player.x, player.y, player.width, player.height)) {
-            
+            PlaySFX("eat");
             mice[m].alive = false;
             updateScore();
         }
@@ -484,6 +575,7 @@ function updateScore() {
 
 function playerDied() {
     $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
+    PlaySFX("meow");
     gameOver = true;  
 }
 
@@ -494,7 +586,7 @@ function gotCheese() {
                 y: 1000
             }     
     cheeseItem.hidden = false;   
-    random = Math.random()* 900;
+    random = Utils.randomNum(950) == 1001;
     random2 = Math.random()* 300;
 
     setTimeout(function(){
