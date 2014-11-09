@@ -130,7 +130,7 @@ animalSpriteSheet.onload = function() {
 characerSpriteSheet.onload = function() {
     
 }
-animalSpriteSheet.src = 'assets/animalSpriteSheet2x.png';
+animalSpriteSheet.src = 'assets/animal.png';
 cheese.src = 'assets/I_C_Cheese.png';
 characerSpriteSheet.src = 'assets/characerSpriteSheet.png'
 ///////////////////
