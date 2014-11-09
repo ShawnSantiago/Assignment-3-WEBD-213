@@ -119,21 +119,26 @@ var spaceKeyDown = false;
 
 var animalSpriteSheet = new Image();
 var cheese = new Image();
+var characerSpriteSheet = new Image();
 cheese.onload = function() {
     // Setup the game    
     init()
 }
 animalSpriteSheet.onload = function() {
-    cheese.src = 'assets/I_C_Cheese.png';
-};
+    
+}
+characerSpriteSheet.onload = function() {
+    
+}
 animalSpriteSheet.src = 'assets/animalSpriteSheet2x.png';
-
+cheese.src = 'assets/I_C_Cheese.png';
+characerSpriteSheet.src = 'assets/characerSpriteSheet.png'
 ///////////////////
 
 // Setup the game and start the main loop
 function init() {
 
-    player = new Player(animalSpriteSheet, 0, 0, 64, 64);
+    player = new Player(characerSpriteSheet, 0, 0, 32, 32);
 
     for(var c=0; c<CONST.NUM_groupOfCats; c++) {
         groupOfCats[c] = new cat(animalSpriteSheet);
@@ -311,7 +316,8 @@ function update(dt) {
             newPlayerX = player.x;
             newPlayerY = player.y;
         }
-    };
+    }
+
     if(player.x == newPlayerX && player.y ==  newPlayerY ) {
         player.idle = true;
     } else {
@@ -364,16 +370,6 @@ function update(dt) {
             newcatY = 0;
         else if(newcatY >= maxY) // The maxY for player and cat are equal, they have same size sprites
             newcatY = maxY;
-
-        // Prevent cat from walking through wall
-        // if(Utils.intersects(newcatX, newcatY, groupOfCats[c].width, groupOfCats[c].height, wall.x, wall.y, wall.width, wall.height)) {
-        //     // Reset new position so cat doesn't move (they can't move into a wall)
-        //     newcatX = groupOfCats[c].x;
-        //     newcatY = groupOfCats[c].y;
-        // } else {
-        //     groupOfCats[c].x = newcatX;
-        //     groupOfCats[c].y = newcatY;
-        // }
 
         for (var i = 0; i < walls.length; i++) {
     
@@ -440,38 +436,33 @@ function update(dt) {
             newMouseY = 0;
         else if(newMouseY >= maxY) // The maxY for player and mouse are equal, they have same size sprites
             newMouseY = maxY;
-
-        // Prevent mouse from walking through wall
-        // if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, wall.x, wall.y, wall.width, wall.height)) {
-        //     // Reset new position so mouse doesn't move (they can't move into a wall)
-        //     newMouseX = mice[m].x;
-        //     newMouseY = mice[m].y;
-        // } else {
-        //     mice[m].x = newMouseX;
-        //     mice[m].y = newMouseY;
-        // }
+        
         for (var i = 0; i < walls.length; i++) {
-    
+            
             if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
                 // Reset new position so player doesn't move (they can't move into a wall)
+                console.log("worked1")
+
                 newMouseX = mice[m].x;
                 newMouseY = mice[m].y;
             } else {
+
                 mice[m].x = newMouseX;
                 mice[m].y = newMouseY;
             }
+
+
         }
-
-
-
-        // Finally do the actual update.
-        mice[m].update(dt);
 
         // If mouse and cat are colliding, mouse dead.
         if(mice[m].alive && mice[m].intersectsWith(player.x, player.y, player.width, player.height)) {
+            
             mice[m].alive = false;
             updateScore();
         }
+
+        // Finally do the actual update.
+        mice[m].update(dt);
     }
 
 }
@@ -503,7 +494,7 @@ function gotCheese() {
                 y: 1000
             }     
     cheeseItem.hidden = false;   
-    random = Math.random()* 300;
+    random = Math.random()* 900;
     random2 = Math.random()* 300;
 
     setTimeout(function(){
@@ -514,12 +505,7 @@ function gotCheese() {
             height:32,
             hidden : true
         }
-        for (var i = 0; i < walls.length; i++) {
-
-        if(Utils.intersects(cheeseItem.x, cheeseItem.y, cheeseItem.width, cheeseItem.height, walls.x, walls.y, walls.width, walls.height)) {
-            gotCheese();
-        } 
-        }
+    
     }, 1000);
     
 }

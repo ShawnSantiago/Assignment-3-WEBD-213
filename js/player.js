@@ -10,10 +10,10 @@
         this.x = 0;
         this.y = 0;
 
-        this.xFrameRef = xFrameRef || 9;
+        this.xFrameRef = xFrameRef || 0;
         this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
-        this.width = 64; // width, height - same as sprite
-        this.height = 64;
+        this.width = 32; // width, height - same as sprite
+        this.height = 32;
 
         // A player "has a" sprite
         this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 3, false);
