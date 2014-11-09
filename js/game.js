@@ -38,7 +38,11 @@ var CONST = {
 
 // Music
 var audioBGMusic = new Audio();
+<<<<<<< HEAD
+audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+=======
 audioBGMusic.src = 'assets/bgmusic.mp3';
+>>>>>>> parent of 2cc72bb... 2.7
 audioBGMusic.loop = true; // we want the background music to loop
 
 // SFX
