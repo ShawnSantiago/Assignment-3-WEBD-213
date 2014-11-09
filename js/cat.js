@@ -10,13 +10,13 @@
         this.x = 0;
         this.y = 0;
 
-        this.xFrameRef = xFrameRef || 6; // cat 9,0
-        this.yFrameRef = yFrameRef || 4; // The starting position of the y sprite frame
-        this.width = 32; // width, height - same as sprite
-        this.height = 32;
+        this.xFrameRef = xFrameRef || 0; // cat 9,0
+        this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
+        this.width = 64; // width, height - same as sprite
+        this.height = 64;
 
         // A cat "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 3, false);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 3, true);
 
         // Change the row position in the sprite sheet
         // do show different walk states

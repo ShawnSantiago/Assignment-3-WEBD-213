@@ -51,7 +51,7 @@ sfx.eat = new Audio();
 sfx.eat.src = 'assets/eating1.mp3';
 
 sfx.squeak = new Audio();
-sfx.squeak.src = 'assets/squeak.mp3';
+sfx.squeak.src = 'assets/eating4.mp3';
 var player;
 var groupOfCats = [];// new Array();
 var mice = [];
@@ -148,9 +148,9 @@ animalSpriteSheet.onload = function() {
 characerSpriteSheet.onload = function() {
     
 }
-animalSpriteSheet.src = 'assets/animal.png';
+animalSpriteSheet.src = 'assets/animalSpriteSheet2x.png';
 cheese.src = 'assets/I_C_Cheese.png';
-characerSpriteSheet.src = 'assets/characerSpriteSheet.png'
+characerSpriteSheet.src = 'assets/characterSpriteSheet.png'
 
 // Setup Audio only once the page has loaded
 function SetupAudio() {
@@ -228,7 +228,7 @@ function PlaySFX(sfxName) {
 function init() {
     SetupAudio();
     // Play a meow, the cat is hungry!
-    player = new Player(characerSpriteSheet, 0, 0, 32, 32);
+    player = new Player(characerSpriteSheet, 0, 0, 64, 64);
 
     for(var c=0; c<CONST.NUM_groupOfCats; c++) {
         groupOfCats[c] = new cat(animalSpriteSheet);
@@ -394,11 +394,7 @@ function update(dt) {
     // Now we check to see if the player is moving or now
     // and set the idle and new positions
 
-    // if(Utils.intersects(newPlayerX, newPlayerY, player.width, player.height, wall.x, wall.y, wall.width, wall.height)) {
-    //     // Reset new position so player doesn't move (they can't move into a wall)
-    //     newPlayerX = player.x;
-    //     newPlayerY = player.y;
-    // }
+  
     for (var i = 0; i < walls.length; i++) {
     
         if(Utils.intersects(newPlayerX, newPlayerY, player.width, player.height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
@@ -580,13 +576,13 @@ function playerDied() {
 }
 
 function gotCheese() {
- 
+    PlaySFX("squeak");
     cheeseItem = {
                 x: 1000,
                 y: 1000
             }     
     cheeseItem.hidden = false;   
-    random = Utils.randomNum(950) == 1001;
+    random = Math.random()* 900;
     random2 = Math.random()* 300;
 
     setTimeout(function(){

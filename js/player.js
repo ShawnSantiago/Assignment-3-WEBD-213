@@ -12,11 +12,11 @@
 
         this.xFrameRef = xFrameRef || 0;
         this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
-        this.width = 32; // width, height - same as sprite
-        this.height = 32;
+        this.width = 64; // width, height - same as sprite
+        this.height = 64;
 
         // A player "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 3, false);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 5, false);
 
         // Change the row position in the sprite sheet
         // do show different walk states

@@ -11,16 +11,16 @@
         this.y = 0;
 
         this.xFrameRef = xFrameRef || 9;
-        this.yFrameRef = yFrameRef || 4; // The starting position of the y sprite frame
-        this.width = 32; // width, height - same as sprite
-        this.height = 32;
+        this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
+        this.width = 64; // width, height - same as sprite
+        this.height = 64;
 
         // A Mouse "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 3, false);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 0, true);
 
         // Change the row position in the sprite sheet
         // do show different walk states
-        this.dir = this.dir = Utils.randomNum(4) - 1; // 0-3 random facing value to start
+        this.dir = Utils.randomNum(4) - 1; // 0-3 random facing value to start
         this.facing = {
             down: 0,
             left: 1,
