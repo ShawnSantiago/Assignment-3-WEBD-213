@@ -10,13 +10,13 @@
         this.x = 0;
         this.y = 0;
 
-        this.xFrameRef = xFrameRef || 9;
+        this.xFrameRef = xFrameRef || 0;
         this.yFrameRef = yFrameRef || 0; // The starting position of the y sprite frame
         this.width = 64; // width, height - same as sprite
         this.height = 64;
 
         // A Mouse "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 0, true);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, true);
 
         // Change the row position in the sprite sheet
         // do show different walk states
@@ -60,7 +60,7 @@
 
             // Include the starting reference along with the row
             // (this sprite sheet has 4 rows, with 3 frames for each direction)
-            this.sprite.frameYOffset = this.yFrameRef + this.dir;
+            this.sprite.frameYOffset = 0;
  
             // Now make sure the sprite updates
             this.sprite.update(deltaTime);
