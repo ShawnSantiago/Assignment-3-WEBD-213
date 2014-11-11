@@ -5,7 +5,7 @@
     // yFrameRef - the row position starting at 0 in spritesheet where sprite frames start
     // mouseSpeed - how fast the mouse moves
     function Mouse(spriteSheetImg, xFrameRef, yFrameRef, mouseSpeed) {
-       
+        this.hitWall = false;
         // Mouse's position
         this.x = 0;
         this.y = 0;
@@ -16,7 +16,7 @@
         this.height = 64;
 
         // A Mouse "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, true);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, false);
 
         // Change the row position in the sprite sheet
         // do show different walk states

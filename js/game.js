@@ -38,11 +38,9 @@ var CONST = {
 
 // Music
 var audioBGMusic = new Audio();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
-=======
-audioBGMusic.src = 'assets/bgmusic.mp3';
->>>>>>> parent of 2cc72bb... 2.7
+
 audioBGMusic.loop = true; // we want the background music to loop
 
 // SFX
@@ -530,14 +528,14 @@ function update(dt) {
         
         for (var i = 0; i < walls.length; i++) {
             
-            if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
+            if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height) && mice.hitWall == true) {
                 // Reset new position so player doesn't move (they can't move into a wall)
-                console.log("worked1")
-
+                
+                mice.hitWall = true; 
                 newMouseX = mice[m].x;
                 newMouseY = mice[m].y;
             } else {
-
+                mice.hitWall == false; 
                 mice[m].x = newMouseX;
                 mice[m].y = newMouseY;
             }

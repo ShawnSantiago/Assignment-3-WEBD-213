@@ -16,7 +16,7 @@
         this.height = 64;
 
         // A cat "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, true);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, false);
 
         // Change the row position in the sprite sheet
         // do show different walk states
