@@ -5,7 +5,7 @@
     // yFrameRef - the row position starting at 0 in spritesheet where sprite frames start
     // catSpeed - how fast the cat moves
     function cat(spriteSheetImg, xFrameRef, yFrameRef, catSpeed) {
-        var randomX = Math.floor((Math.random() * 3) + 1);
+        var randomX = Math.floor((Math.random() * 3) * 1);
         // cat's position
         this.x = 0;
         this.y = 0;
@@ -16,7 +16,7 @@
         this.height = 64;
 
         // A cat "has a" sprite
-        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, false);
+        this.sprite = new Sprite(spriteSheetImg, this.xFrameRef, this.yFrameRef, this.width, this.height, 10, 1, true);
 
         // Change the row position in the sprite sheet
         // do show different walk states

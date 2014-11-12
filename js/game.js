@@ -619,16 +619,16 @@ document.addEventListener('keydown', function(e) {
             spaceKeyDown = true;
             break;
 
-        case 37: // Left
+        case 65: // Left
             dirKeysDown[CONST.KEY.LEFT] = true;           
             break;
-        case 38: // Up
+        case 87: // Up
             dirKeysDown[CONST.KEY.UP] = true;
             break;
-        case 39: // Right
+        case 68: // Right
              dirKeysDown[CONST.KEY.RIGHT] = true;            
             break;
-        case 40: // Down
+        case 83: // Down
             dirKeysDown[CONST.KEY.DOWN] = true;          
             break;
 
@@ -650,16 +650,16 @@ document.addEventListener('keyup', function(e) {
             spaceKeyDown = false;
             break;
 
-        case 37: // Left
+        case 65: // Left
             dirKeysDown[CONST.KEY.LEFT] = false;           
             break;
-        case 38: // Up
+        case 87: // Up
             dirKeysDown[CONST.KEY.UP] = false;
             break;
-        case 39: // Right
+        case 68: // Righta
              dirKeysDown[CONST.KEY.RIGHT] = false;            
             break;
-        case 40: // Down
+        case 83: // Down
             dirKeysDown[CONST.KEY.DOWN] = false;          
             break;
 
