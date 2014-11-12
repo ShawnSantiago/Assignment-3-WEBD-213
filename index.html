@@ -4,15 +4,30 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8"/>;
+    <link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8"/>
     <script type="text/javascript"></script>
     <title>Week 8 - Cat Game 2</title>
 </head>
 <body>
+    
+    <h1><img src="assets/czeLogo.png"></h1>
+
+
+    <div id="gameInfo">
+        <p id="arrowInstruction">Use the (up), (down), (right), (left) keys on your keyboard to move around the map.</p>
+        <ul>
+            <li><img src="assets/meats3types.png"></li>
+            <li><p>Collect as much meat as you can before your time runs out to become the next meat pit champion.</p></li>
+        </ul>
+        <ul>
+            <li><img src="assets/veggies3types.png"></li>
+            <li><p>Veggies are for chumps!  Don't get caught touching these things or your fans will never forgive you.  Destroy Destroy! Meat! Meat! MEAT!</p></li>
+        </ul>
+    </div>
     <div id="timerWrapper">
         <ul id="scoreItems">
             <li>
-                <img id="meatTypes" src="assets/meats3types.png">
+                <div id="meatTypes"></div>
             </li>
             <li>
                  <div class="score">0</div>
@@ -21,7 +36,7 @@
         
         <ul id="timerItems">
             <li>
-                <span><i class="fa fa-clock-o fa-3x"></i></span>
+                <i class="fa fa-clock-o fa-3x"></i>
             </li>
             <li>
                 <div id="countdown">100</div>
