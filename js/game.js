@@ -29,16 +29,18 @@ var ctx = canvas.getContext("2d");
 var CONST = {
     MOVE_SPEED: 5.0, // The player's movement speed, in pixels
     cat_SPEED: 2.0,
-    NUM_groupOfCats: 2,
+    NUM_groupOfCats: 4,
     MOUSE_SPEED: 2.0,
-    NUM_MICE: 6
+    NUM_MICE: 8
 }; // For constants, vars that never change
 
 /// SETUP AUDIO FILES ////
 
 // Music
 var audioBGMusic = new Audio();
-//<<<<<<< HEAD
+
+audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+
 audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
 
 audioBGMusic.loop = true; // we want the background music to loop
@@ -107,12 +109,17 @@ var walls = [];
 var img = document.getElementById("lamp")
 var pat = ctx.createPattern(img, "repeat");
 ctx.fillStyle = pat;
-walls.push(new Shape(200, 100, 50 ,500 ,pat))
-walls.push(new Shape(400, 0, 50, 200, pat));
-walls.push(new Shape(400, 300, 50, 200, pat));
-walls.push(new Shape(600, 0, 50, 500, pat));
-walls.push(new Shape(800, 70, 50, 200, pat));
-walls.push(new Shape(800, 400, 50, 200, pat));
+walls.push(new Shape(0, 100, 50 ,500 ,pat));
+walls.push(new Shape(200, 100, 50 ,300 ,pat));//wall 1
+walls.push(new Shape(400, 0, 50, 200, pat));//wall 2
+walls.push(new Shape(200, 500, 250 ,25 ,pat));
+walls.push(new Shape(400, 300, 50, 200, pat));//wall 3
+walls.push(new Shape(600, 200, 50, 500, pat));//wall 4
+walls.push(new Shape(800, 70, 50, 200, pat));//wall 5
+walls.push(new Shape(800, 400, 50, 200, pat));//wall 6
+walls.push(new Shape(400, 300, 200, 25, pat));//wall 7
+walls.push(new Shape(200, 200, 200, 25, pat));
+walls.push(new Shape(800, 250, 300, 25, pat));
 
 
 
@@ -528,14 +535,14 @@ function update(dt) {
         
         for (var i = 0; i < walls.length; i++) {
             
-            if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height) && mice.hitWall == true) {
+            if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
                 // Reset new position so player doesn't move (they can't move into a wall)
-                
-                mice.hitWall = true; 
+                console.log("worked1")
+
                 newMouseX = mice[m].x;
                 newMouseY = mice[m].y;
             } else {
-                mice.hitWall == false; 
+
                 mice[m].x = newMouseX;
                 mice[m].y = newMouseY;
             }

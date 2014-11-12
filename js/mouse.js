@@ -5,7 +5,7 @@
     // yFrameRef - the row position starting at 0 in spritesheet where sprite frames start
     // mouseSpeed - how fast the mouse moves
     function Mouse(spriteSheetImg, xFrameRef, yFrameRef, mouseSpeed) {
-        this.hitWall = false;
+       
         // Mouse's position
         this.x = 0;
         this.y = 0;
