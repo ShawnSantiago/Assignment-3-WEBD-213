@@ -1,0 +1,88 @@
+/* TIMER OPTIONS  All timer items are here */
+#timerWrapper {
+	width:400px;
+	height:150px;
+	margin: 0 auto;
+}
+
+.score {
+    font-family: 'Roboto', sans-serif;
+    font-size:40px;
+    font-weight: 700;
+    position:relative;
+    width:60px;
+    float:left;
+}
+
+#countdown {
+    font-family: 'Roboto', sans-serif;
+    font-size:40px;
+    font-weight: 700;
+    position:relative;
+    display: inline;
+    width:60px;
+}
+
+#scoreItems{
+ display:block;
+ list-style-type: none;
+}
+
+#timerItems {
+    list-style-type: none; 
+    float:left;
+    width:auto;
+}
+
+ul#timerItems li span i {
+    width:192px;
+} 
+
+
+#meatTypes{
+    float: left;
+    margin-right: 50px;
+}
+
+
+
+/* GAME CANVAS */
+#appCanvas {
+    display: block;
+    margin: 0 auto; 
+    margin-top: 80px; 
+    background: url(../assets/floor2.jpg);
+}
+
+.gameWindow {
+    /* Wrapping a class that has an absolute position
+       with one that is relative helps control where the
+       absolute position starts */
+    position:relative;
+}
+
+
+
+.gameOverSuccess {
+    display:block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(27, 20, 100, 1);
+    position: absolute;           
+    top:220px;
+    left: 550px;           
+    /* update these 2 lines to match appCanvas to keep centered */  
+    width: 400px;
+    height: 200px;       
+    line-height: 200px; 
+    text-align: center;         
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    border-radius: 5px;
+}
+
+.reveal {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(27, 20, 100, 1);
+}
