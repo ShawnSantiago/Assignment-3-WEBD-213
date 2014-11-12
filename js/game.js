@@ -39,9 +39,9 @@ var CONST = {
 // Music
 var audioBGMusic = new Audio();
 
-audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+// audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
 
-audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+// audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
 
 audioBGMusic.loop = true; // we want the background music to loop
 
