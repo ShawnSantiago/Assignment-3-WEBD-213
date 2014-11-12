@@ -48,14 +48,14 @@ audioBGMusic.loop = true; // we want the background music to loop
 // SFX
 var sfx = {};
 
-// sfx.meow = new Audio();
-// sfx.meow.src = 'assets/death4.mp3';
+sfx.meow = new Audio();
+sfx.meow.src = 'assets/death4.mp3';
 
-// sfx.eat = new Audio();
-// sfx.eat.src = 'assets/eating1.mp3';
+sfx.eat = new Audio();
+sfx.eat.src = 'assets/eating1.mp3';
 
-// sfx.squeak = new Audio();
-// sfx.squeak.src = 'assets/eating4.mp3';
+sfx.squeak = new Audio();
+sfx.squeak.src = 'assets/eating4.mp3';
 var player;
 var groupOfCats = [];// new Array();
 var mice = [];

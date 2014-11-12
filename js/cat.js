@@ -5,12 +5,12 @@
     // yFrameRef - the row position starting at 0 in spritesheet where sprite frames start
     // catSpeed - how fast the cat moves
     function cat(spriteSheetImg, xFrameRef, yFrameRef, catSpeed) {
-       
+        var randomX = Math.floor((Math.random() * 3) + 1);
         // cat's position
         this.x = 0;
         this.y = 0;
 
-        this.xFrameRef = xFrameRef || 0; // cat 9,0
+        this.xFrameRef = xFrameRef || randomX; // cat 9,0
         this.yFrameRef = yFrameRef || 1; // The starting position of the y sprite frame
         this.width = 64; // width, height - same as sprite
         this.height = 64;
@@ -60,7 +60,11 @@
 
             // Include the starting reference along with the row
             // (this sprite sheet has 4 rows, with 3 frames for each direction)
-            this.sprite.frameYOffset = 1;
+            
+               
+            
+            this.sprite.frameYOffset = 1 ;
+
            
  
             // Now make sure the sprite updates
