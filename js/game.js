@@ -62,12 +62,13 @@ var mice = [];
 var lastTime; // Used for deltaTime
 var score = 0; // Num eaten groupOfCats
 var gameOver = false;
-var seconds = 30;
+var seconds = 31;
 var temp;
+var stopCountDown;//Used to start/stop the timer
 
 function countdown() {
 
-    if (seconds <= 1) {
+    if (seconds <= 0) {
       playerDied()
       return;
     }
@@ -75,11 +76,19 @@ function countdown() {
     seconds--;
     temp = document.getElementById('countdown');
     temp.innerHTML = seconds;
-    timeoutMyOswego = setTimeout(countdown, 1000);
-
+    //timeoutMyOswego = setTimeout(countdown, 1000);
+    stopCountDown = setTimeout(countdown, 1000);
 } 
 
 countdown();
+
+function stopTimer() { //Stops the timer, is called in the playerDied() function
+
+    clearTimeout(stopCountDown);
+
+}
+
+
 
 random = Math.random()* 800;
 random2 = Math.random()* 300;
@@ -563,14 +572,22 @@ function updateScore() {
 
         $('.gameOverSuccess').html("You Win").addClass('reveal');
         gameOver = true;  
+
+        if (gameOver = true) {
+            stopTimer();
+        }
     }
 }
 
 function playerDied() {
+
     $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
     PlaySFX("meow");
     player.died = true;
-    gameOver = true;  
+    gameOver = true;
+    if (gameOver = true) {
+        stopTimer();
+    }
 }
 
 function gotCheese() {
@@ -592,7 +609,7 @@ function gotCheese() {
             hidden : true
         }
     
-    }, 1000);
+    }, 5000);
     
 }
 
