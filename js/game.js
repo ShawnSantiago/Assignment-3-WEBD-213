@@ -589,9 +589,6 @@ function playerDied() {
     $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
     PlaySFX("meow");
     player.kill();
-    //player.yFrameRef = 5;
-    //player.xFrameRef = 0;
-
     gameOver = true;
     if (gameOver = true) {
         stopTimer();
