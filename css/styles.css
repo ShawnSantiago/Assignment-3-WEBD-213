@@ -1,5 +1,8 @@
 @font-face{ font-family: 'MyWebFont'; src: url('WebFont.eot'); src: url('WebFont.eot?#iefix') format('embedded-opentype'), url('WebFont.woff') format('woff'), url('WebFont.ttf') format('truetype'), url('WebFont.svg#webfont') format('svg'); }
-
+div,ul,li {
+    margin: 0;
+    padding:0;
+}
 
 html {
     font-family: 'Roboto', sans-serif;
@@ -19,6 +22,14 @@ h1  {
   clear: both;
 }
 
+.vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 /* TIMER OPTIONS  All timer items are here */
 #timerWrapper {
 	width:1080px;
@@ -32,8 +43,6 @@ h1  {
     font-size:70px;
     font-weight: 700;
     line-height: 47px;
-    position:relative;
-    width:60px;
     float:left;
 }
 
@@ -47,44 +56,54 @@ h1  {
     font-size:70px;
     font-weight: 700;
     line-height: 60px;
-    position:relative;
-    display: inline;
-    width:60px;
-    float:right;
+
 }
 
 #scoreItems{
-
-  float: left;
- list-style-type: none;
- width: 330px;
- height:64px;
- padding-left: 0;
+    margin-left: 150px;
+    float: left;
+    list-style-type: none;
+    padding-left: 0;
+}
+#scoreItems li{
+    float: left;
+    
+}
+#scoreItems h2{
+    font-family: '300_trojansregular';
+    font-size:70px;
+    font-weight: 700;
+    line-height: 60px;
+    margin: 0;
+    margin: 0 20px;
+    float: left;
+    
 }
 
 #timerItems {
-    
     height:64px;
+    margin-left: 50px;
     list-style-type: none;
     float:left;
-
-   
+}
+ 
+#timerItems li {
+    margin-left: 15px;
+    float: left;
 }
 
 ul#timerItems li i {
     width:70px;
-     float:right;
-     clear:both;
+     
 } 
-
 
 #meatTypes{
     content: '';
     float: left;
-    height:45px;
-    width:170px;
+    height:64px;
+    width:200px;
     background: url(../assets/meats3types.png);
-    background-size: 70%;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 
@@ -137,7 +156,6 @@ ul#timerItems li i {
 #appCanvas {
     display: block;
     margin: 0 auto; 
-    margin-top: 80px; 
     background: url(../assets/floor2.jpg);
 }
 
@@ -175,6 +193,7 @@ ul#timerItems li i {
 }
 
 .volume {
+    padding-left: 50px;
     float: left;
     list-style-type: none
 }
