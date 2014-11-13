@@ -11,56 +11,70 @@
 </head>
 <body>
 
-    <h1><img src="assets/czeLogo.png"></h1>
+   
+        <h1><img src="assets/czeLogo.png"></h1>
 
+    
+        <section id="gameInfo">
 
-    <div id="gameInfo">
+            <p id="arrowInstruction">Use the <span class="greekTxt">W</span>, <span class="greekTxt">S</span>, <span class="greekTxt">A</span>,<span class="greekTxt">D</span> keys on your keyboard to move around the map.</p>
 
-        <p id="arrowInstruction">Use the W(up), S(down), D(right), A(left) keys on your keyboard to move around the map.</p>
+            <ul>
+                <li><img src="assets/meats3types.png"></li>
+                <li><p>Collect as much meat as you can before your time runs out to become the next meat pit champion.</p></li>
+            </ul>
+            <ul>
+                <li><img src="assets/veggies3types.png"></li>
+                <li><p>Veggies are for chumps!  Don't get caught touching these things or your fans will never forgive you.  Destroy Destroy! Meat! Meat! MEAT!</p></li>
+            </ul>
+        </section>
+        <section id="timerWrapper" class="clearfix ">
+            <ul id="scoreItems" class="clearfix">
+                <li>
+                    <div id="meatTypes"></div>
+                </li>
+                <li>
+                    <h2>Score: </h2>
+                     <div class="score"> 0</div>
+                </li>
+            </ul>
 
-        <p id="arrowInstruction">Use the <span class="greekTxt">W</span>, <span class="greekTxt">S</span>, <span class="greekTxt">A</span>,<span class="greekTxt">D</span> keys on your keyboard to move around the map.</p>
-
-        <ul>
-            <li><img src="assets/meats3types.png"></li>
-            <li><p>Collect as much meat as you can before your time runs out to become the next meat pit champion.</p></li>
-        </ul>
-        <ul>
-            <li><img src="assets/veggies3types.png"></li>
-            <li><p>Veggies are for chumps!  Don't get caught touching these things or your fans will never forgive you.  Destroy Destroy! Meat! Meat! MEAT!</p></li>
-        </ul>
-    </div>
-    <div id="timerWrapper" class="clearfix ">
-        <ul id="scoreItems" class="clearfix">
-            <li>
-                <div id="meatTypes"></div>
-            </li>
-            <li>
-                <h2>Score: </h2>
-                 <div class="score"> 0</div>
-            </li>
-        </ul>
-
-        <ul class="volume">
-             <li><div id="mute"></div></li>
-         </ul> 
-        
-        <ul id="timerItems" >
-            <li >
-                <i class="fa fa-clock-o fa-3x"></i>
-            </li>
-            <li>
-                <div id="countdown">100</div>
-            </li>
-        </ul>
-    </div>
-    <div class="gameWindow">
-        <img src="assets/spike.png" id="lamp" width="50" height="50" style="display:none">
-        <div class="gameOverSuccess"></div>
-        <!-- The main frame of the game -->
-        <canvas id="appCanvas" width="1080" height="600">
-            If you see this, Canvas not supported.
-        </canvas>   
-    </div>
+            <ul class="volume">
+                 <li><div id="mute"></div></li>
+             </ul> 
+            
+            <ul id="timerItems" >
+                <li >
+                    <i class="fa fa-clock-o fa-3x"></i>
+                </li>
+                <li>
+                    <div id="countdown">100</div>
+                </li>
+            </ul>
+        </section>
+        <section id="arenaArea" class="clearfix">
+            <div class="spikesHoriz">
+                <img id="topSpikes" src="assets/topSpikes.png"></div>
+            </div>
+                <div class="gameWindow">
+                    <img src="assets/spike.png" id="lamp" width="50" height="50" style="display:none">
+                    <div class="gameOverSuccess"></div>
+                    <!-- The main frame of the game -->
+                    <div class="spikesVert">
+                        <img id="leftSpikes" src="assets/leftSpikes.png"></div>
+                    </div>
+                    <canvas id="appCanvas" width="1080" height="600">
+                        If you see this, Canvas not supported.
+                    </canvas> 
+                    <div class="spikesVert">
+                        <img id="rightSpikes" src="assets/rightSpikes.png"></div>
+                    </div>  
+                </div>
+            <div class="spikesHoriz">
+                <img id="botSpikes" src="assets/bottomSpikes.png"></div>
+            </div>
+        </section>
+    </div><!-- wholeGameWrapper -->
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/shape.js"></script>  
     <script type="text/javascript" src="js/sprite.js"></script> 
