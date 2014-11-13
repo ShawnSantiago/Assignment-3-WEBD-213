@@ -21,8 +21,7 @@ h1  {
 
 /* TIMER OPTIONS  All timer items are here */
 #timerWrapper {
-	width:1080px;;
-    height:1px;
+	width:1080px;
 	margin:0 auto;
     margin-top:100px;
    
@@ -66,7 +65,7 @@ h1  {
 #timerItems {
     
     height:64px;
- 
+    list-style-type: none;
     float:left;
 
    
@@ -96,7 +95,7 @@ ul#timerItems li i {
 
 #gameInfo {
     width:1000px;
-    height:350px;
+    height:550px;
     margin:0 auto;
     background-color: rgba(27, 20, 100, .2);
     border-radius: 5px;
