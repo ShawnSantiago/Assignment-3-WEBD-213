@@ -30,6 +30,17 @@ h1  {
   transform: translateY(-50%);
 }
 
+#ridiculouslyUnNecessaryWrap {
+    width:100%;
+    height:1300px;
+    background: url(../assets/floor2.jpg);
+}
+
+#wholeGameWrapper {
+  
+}
+
+
 /* TIMER OPTIONS  All timer items are here */
 #timerWrapper {
 	width:1080px;
@@ -114,7 +125,7 @@ ul#timerItems li i {
 
 #gameInfo {
     width:1000px;
-    height:550px;
+    height:380px;
     margin:0 auto;
     background-color: rgba(27, 20, 100, .2);
     border-radius: 5px;
@@ -152,9 +163,50 @@ ul#timerItems li i {
 #gameInfo ul li:nth-child(2) {
     width:900px;
 }
+
+/*SPIKED WALLS AROUND CANVAS*/
+
+.spikesHoriz {
+    width:1080px;
+    height:64px;
+    margin: 0 auto;
+}
+
+.spikesVert {
+    width:64px;
+    height:600px;
+    display: inline;
+}
+#topSpikes {
+    width: 1080px;
+    height: 64px;
+}
+
+#botSpikes {
+     width: 1080px;
+    height: 64px;
+}
+
+#leftSpikes {
+    width:64px;
+    height:600px;
+    float:left;
+}
+
+#rightSpikes {
+    width:64px;
+    height:600px;
+    float:right;
+}
+#arenaArea {
+    width: 1208px;
+    margin: 0 auto;
+}
+
+
 /* GAME CANVAS */
 #appCanvas {
-    display: block;
+    display: inline;
     margin: 0 auto; 
     background: url(../assets/floor2.jpg);
 }
@@ -164,6 +216,7 @@ ul#timerItems li i {
        with one that is relative helps control where the
        absolute position starts */
     position:relative;
+    margin: 0 auto;
 }
 
 
