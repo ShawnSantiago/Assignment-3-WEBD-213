@@ -65,7 +65,6 @@
     }
 
     Sprite.prototype.render = function(context) {        
-
         context.drawImage(
             this.img,
             this.width*this.frameXOffset + this.width*this.frame,

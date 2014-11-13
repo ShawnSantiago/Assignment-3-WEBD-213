@@ -28,9 +28,9 @@ var ctx = canvas.getContext("2d");
 // Define our global vars
 var CONST = {
     MOVE_SPEED: 5.0, // The player's movement speed, in pixels
-    cat_SPEED: 2.0,
-    NUM_groupOfCats: 4,
-    MOUSE_SPEED: 2.0,
+    cat_SPEED: 3.0,
+    NUM_groupOfCats: 6,
+    MOUSE_SPEED: 3.0,
     NUM_MICE: 8
 }; // For constants, vars that never change
 
@@ -39,9 +39,9 @@ var CONST = {
 // Music
 var audioBGMusic = new Audio();
 
-// audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
 
-// audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
+audioBGMusic.src = 'assets/WiiStoreMusic.mp3';
 
 audioBGMusic.loop = true; // we want the background music to loop
 
@@ -62,12 +62,13 @@ var mice = [];
 var lastTime; // Used for deltaTime
 var score = 0; // Num eaten groupOfCats
 var gameOver = false;
-var seconds = 30;
+var seconds = 31;
 var temp;
+var stopCountDown;//Used to start/stop the timer
 
 function countdown() {
 
-    if (seconds <= 1) {
+    if (seconds <= 0) {
       playerDied()
       return;
     }
@@ -75,11 +76,19 @@ function countdown() {
     seconds--;
     temp = document.getElementById('countdown');
     temp.innerHTML = seconds;
-    timeoutMyOswego = setTimeout(countdown, 1000);
-
+    //timeoutMyOswego = setTimeout(countdown, 1000);
+    stopCountDown = setTimeout(countdown, 1000);
 } 
 
 countdown();
+
+function stopTimer() { //Stops the timer, is called in the playerDied() function
+
+    clearTimeout(stopCountDown);
+
+}
+
+
 
 random = Math.random()* 800;
 random2 = Math.random()* 300;
@@ -104,7 +113,7 @@ walls.push(new Shape(200, 100, 50 ,300 ,pat));//wall 1
 walls.push(new Shape(400, 0, 50, 200, pat));//wall 2
 walls.push(new Shape(200, 500, 250 ,25 ,pat));
 walls.push(new Shape(400, 300, 50, 200, pat));//wall 3
-walls.push(new Shape(600, 200, 50, 500, pat));//wall 4
+//walls.push(new Shape(600, 200, 50, 500, pat));//wall 4
 walls.push(new Shape(800, 70, 50, 200, pat));//wall 5
 walls.push(new Shape(800, 400, 50, 200, pat));//wall 6
 walls.push(new Shape(400, 300, 200, 25, pat));//wall 7
@@ -231,13 +240,13 @@ function init() {
 
     for(var c=0; c<CONST.NUM_groupOfCats; c++) {
         groupOfCats[c] = new cat(animalSpriteSheet);
-        groupOfCats[c].x = canvas.width/2; // ------spawn location
-        groupOfCats[c].y = canvas.height/2;
+        groupOfCats[c].x = canvas.width/2.4; // ------spawn location
+        groupOfCats[c].y = canvas.height/3.7;
     }
 
     for(var m=0; m<CONST.NUM_MICE; m++) {
         mice[m] = new Mouse(animalSpriteSheet);
-        mice[m].x = canvas.width/2;
+        mice[m].x = canvas.width/1.5;
         mice[m].y = canvas.height/2;
     }
 
@@ -339,6 +348,7 @@ function drawCheckerboard() {
 // Update values and state changes in here
 function update(dt) {
 
+
     // Update sprites and other values here
    
     /////////////////////////////
@@ -390,6 +400,9 @@ function update(dt) {
         player.dir = player.facing.left;
     }
 
+    
+
+
     // Now we check to see if the player is moving or now
     // and set the idle and new positions
 
@@ -412,6 +425,10 @@ function update(dt) {
         player.x = newPlayerX;
         player.y = newPlayerY;
     }
+    if (player.died == true) {
+        player.dir = player.facing.died;
+        console.log(player.died);
+    };
 
     player.update(dt);
 
@@ -455,19 +472,20 @@ function update(dt) {
             newcatY = 0;
         else if(newcatY >= maxY) // The maxY for player and cat are equal, they have same size sprites
             newcatY = maxY;
-
         for (var i = 0; i < walls.length; i++) {
     
             if(Utils.intersects(newcatX, newcatY, groupOfCats[c].width, groupOfCats[c].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
                 // Reset new position so player doesn't move (they can't move into a wall)
-               newcatX = groupOfCats[c].x;
+                
+                newcatX = groupOfCats[c].x;
                 newcatY = groupOfCats[c].y;
-            } else {
-                groupOfCats[c].x = newcatX;
-                groupOfCats[c].y = newcatY;
-            }
+                break
+            } 
         }
-
+       
+        groupOfCats[c].x = newcatX;
+        groupOfCats[c].y = newcatY;
+              
         // Finally do the actual update.
         groupOfCats[c].update(dt);
 
@@ -529,14 +547,11 @@ function update(dt) {
                 // Reset new position so player doesn't move (they can't move into a wall)
                 newMouseX = mice[m].x;
                 newMouseY = mice[m].y;
-            } else {
-
-                mice[m].x = newMouseX;
-                mice[m].y = newMouseY;
-            }
-
-
+                break
+            } 
         }
+        mice[m].x = newMouseX;
+        mice[m].y = newMouseY;
 
         // If mouse and cat are colliding, mouse dead.
         if(mice[m].alive && mice[m].intersectsWith(player.x, player.y, player.width, player.height)) {
@@ -563,14 +578,24 @@ function updateScore() {
 
         $('.gameOverSuccess').html("You Win").addClass('reveal');
         gameOver = true;  
+
+        if (gameOver = true) {
+            stopTimer();
+        }
     }
 }
 
 function playerDied() {
     $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
     PlaySFX("meow");
-    player.died = true;
-    gameOver = true;  
+    player.kill();
+    //player.yFrameRef = 5;
+    //player.xFrameRef = 0;
+
+    gameOver = true;
+    if (gameOver = true) {
+        stopTimer();
+    }
 }
 
 function gotCheese() {
@@ -592,7 +617,7 @@ function gotCheese() {
             hidden : true
         }
     
-    }, 1000);
+    }, 5000);
     
 }
 

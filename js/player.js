@@ -25,7 +25,8 @@
             down: 0,
             left: 1,
             right: 2,
-            up: 3
+            up: 3,
+            died: 4
         };
 
         this.idle = false;
@@ -47,10 +48,18 @@
         // Set the animation idle property
         this.sprite.pauseAnim = this.idle;
 
-        
-
+       
         // Now make sure the sprite updates
         this.sprite.update(deltaTime);
+    }
+
+    Player.prototype.kill = function() {
+        this.died == true
+        this.sprite.pauseAnim = true;
+        this.sprite.frameYOffset = this.yFrameRef + this.facing.died;
+        this.sprite.frameXOffset = 0;
+        this.sprite.frame = 0;
+
     }
 
     Player.prototype.render = function(context) {

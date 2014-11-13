@@ -209,7 +209,7 @@ ul#timerItems li i {
 #rightSpikes {
     width:64px;
     height:600px;
-    float:right;
+    position: absolute;
 }
 
 
