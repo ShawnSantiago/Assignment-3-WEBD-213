@@ -1,6 +1,9 @@
+@font-face{ font-family: 'MyWebFont'; src: url('WebFont.eot'); src: url('WebFont.eot?#iefix') format('embedded-opentype'), url('WebFont.woff') format('woff'), url('WebFont.ttf') format('truetype'), url('WebFont.svg#webfont') format('svg'); }
+
+
 html {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.1em;
+    font-size: 1.5em;
     font-weight:500;
 }
 
@@ -19,14 +22,17 @@ h1  {
 /* TIMER OPTIONS  All timer items are here */
 #timerWrapper {
 	width:1080px;;
+    height:1px;
 	margin:0 auto;
     margin-top:100px;
+   
 }
 
 .score {
-    font-family: 'Roboto', sans-serif;
-    font-size:40px;
+     font-family: '300_trojansregular';
+    font-size:70px;
     font-weight: 700;
+    line-height: 47px;
     position:relative;
     width:60px;
     float:left;
@@ -38,9 +44,10 @@ h1  {
 }
 
 #countdown {
-    font-family: 'Roboto', sans-serif;
-    font-size:40px;
+    font-family: '300_trojansregular';
+    font-size:70px;
     font-weight: 700;
+    line-height: 60px;
     position:relative;
     display: inline;
     width:60px;
@@ -67,18 +74,19 @@ h1  {
 
 ul#timerItems li i {
     width:70px;
-     float: left;
+     float:right;
+     clear:both;
 } 
 
 
 #meatTypes{
     content: '';
     float: left;
-    margin-right: 50px;
-    height:64px;
-    width:192px;
+    height:45px;
+    width:170px;
     background: url(../assets/meats3types.png);
-    background-size: cover;
+    background-size: 70%;
+    background-repeat: no-repeat;
 }
 
 
@@ -87,21 +95,30 @@ ul#timerItems li i {
 
 
 #gameInfo {
-    width:1080px;
+    width:1000px;
+    height:350px;
     margin:0 auto;
+    background-color: rgba(27, 20, 100, .2);
+    border-radius: 5px;
 }
 
 #arrowInstruction {
     margin: 0 auto;
     width:730px;
     margin-bottom: 50px;
+    margin-top: 50px;
+    padding-top: 35px;
 }
 
+.greekTxt {
+  font-family: '300_trojansregular';
+    font-size: 40px;
+}
 
 #gameInfo ul {
     list-style-type: none;
     display:block;
-    width: 730px;
+    width: 930px;
     height:64px;
     padding:0;
     margin:0 auto;
@@ -115,7 +132,7 @@ ul#timerItems li i {
 }
 
 #gameInfo ul li:nth-child(2) {
-    width:700px;
+    width:900px;
 }
 /* GAME CANVAS */
 #appCanvas {
