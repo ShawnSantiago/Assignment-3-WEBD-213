@@ -284,3 +284,4 @@ ul#timerItems li i {
 #mute {
     background: url(../assets/mute.png) no-repeat center;
     background-size :auto;
+    opacity: 0.5;

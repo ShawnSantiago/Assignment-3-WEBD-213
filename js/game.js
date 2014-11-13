@@ -200,13 +200,13 @@ function volumeMute() {
    
 
     if(!audioBGMusic.muted) {
-        $('#mute').css({ opacity: 0.5 });;
+        $('#mute').css({ opacity: 1 });;
         audioBGMusic.muted = true;
         sfx.meow.muted     = true;
         sfx.eat.muted      = true;
         sfx.squeak.muted   = true;
     } else {
-        $('#mute').css({ opacity: 1 });;
+        $('#mute').css({ opacity: 0.5 });;
         audioBGMusic.muted = false;
         sfx.meow.muted     = false;
         sfx.eat.muted      = false;
