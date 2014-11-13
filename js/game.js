@@ -1,7 +1,7 @@
 // A cross-browser requestAnimationFrame
 // See https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
 var requestAnimFrame = (function(){
-    console.log("requestAnimFrame");
+    //console.log("requestAnimFrame");
     return window.requestAnimationFrame    ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
@@ -80,16 +80,6 @@ function countdown() {
 } 
 
 countdown();
-
-// A simple object for a wall, just holds properties
-// var wall = {
-//     x: 200,
-//     y: 100,
-//     width: 50,
-//     height:300,
-
-    
-// }
 
 random = Math.random()* 800;
 random2 = Math.random()* 300;
@@ -537,8 +527,6 @@ function update(dt) {
             
             if(Utils.intersects(newMouseX, newMouseY, mice[m].width, mice[m].height, walls[i].x, walls[i].y, walls[i].width, walls[i].height)) {
                 // Reset new position so player doesn't move (they can't move into a wall)
-                console.log("worked1")
-
                 newMouseX = mice[m].x;
                 newMouseY = mice[m].y;
             } else {
@@ -581,6 +569,7 @@ function updateScore() {
 function playerDied() {
     $('.gameOverSuccess').html("Try Again").addClass('reveal'); 
     PlaySFX("meow");
+    player.died = true;
     gameOver = true;  
 }
 

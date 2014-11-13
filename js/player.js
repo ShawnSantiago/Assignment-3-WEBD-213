@@ -29,7 +29,11 @@
         };
 
         this.idle = false;
-
+        this.died = false;
+        if (this.died == true) {
+            this.xFrameRef = 0;
+            this.yFrameRef = 5;
+        }
     };
 
     Player.prototype.update = function(deltaTime) {
@@ -45,6 +49,8 @@
        
         // Set the animation idle property
         this.sprite.pauseAnim = this.idle;
+
+        
 
         // Now make sure the sprite updates
         this.sprite.update(deltaTime);
