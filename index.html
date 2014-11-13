@@ -14,7 +14,7 @@
 
 
     <div id="gameInfo">
-        <p id="arrowInstruction">Use the (up), (down), (right), (left) keys on your keyboard to move around the map.</p>
+        <p id="arrowInstruction">Use the W(up), S(down), D(right), A(left) keys on your keyboard to move around the map.</p>
         <ul>
             <li><img src="assets/meats3types.png"></li>
             <li><p>Collect as much meat as you can before your time runs out to become the next meat pit champion.</p></li>
@@ -25,14 +25,20 @@
         </ul>
     </div>
     <div id="timerWrapper">
-        <ul id="scoreItems">
+        <ul id="scoreItems" class="clearfix">
             <li>
                 <div id="meatTypes"></div>
             </li>
             <li>
                  <div class="score">0</div>
             </li>
-        </ul> 
+        </ul>
+
+        <ul class="volume">
+             <li><div id="volUp"></div> </li>
+             <li><div id="volDown"></div></li>
+             <li><div id="mute"></div></li>
+         </ul> 
         
         <ul id="timerItems">
             <li>
